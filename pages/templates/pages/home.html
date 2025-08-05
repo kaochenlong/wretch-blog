@@ -1,7 +1,5 @@
-<h1>Home</h1>
+{% extends "layouts/default.html" %}
 
-<section class="flex">
-  {% for num in lucky %}
-  <div>{{ num }}</div>
-  {% endfor %}
-</section>
+{% block content %}
+<h1>首頁</h1>
+{% endblock %}
