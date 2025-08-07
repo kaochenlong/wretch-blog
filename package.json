@@ -7,12 +7,16 @@
     "js:dev": "esbuild src/scripts/app.js --bundle --outfile=public/scripts/app.js --watch",
     "js:build": "esbuild src/scripts/app.js --bundle --minify --outfile=public/scripts/app.js",
     "css:dev": "npx @tailwindcss/cli -i src/styles/app.css -o public/styles/app.css --watch",
-    "css:build": "npx @tailwindcss/cli -i src/styles/app.css -o public/styles/app.css --minify"
+    "css:build": "npx @tailwindcss/cli -i src/styles/app.css -o public/styles/app.css --minify",
+    "dev": "concurrently 'npm run js:dev' 'npm run css:dev'",
+    "build": "concurrently 'npm run js:build' 'npm run css:build'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^9.2.0",
+    "daisyui": "^5.0.50",
     "esbuild": "^0.25.8"
   },
   "dependencies": {
