@@ -19,4 +19,21 @@ def new(request):
 
 def detail(request, id):
     article = get_object_or_404(Article, pk=id)
-    return render(request, "articles/detail.html", {"article": article})
+
+    if request.POST:
+        if request.POST["_method"] == "patch":
+            article.title = request.POST["title"]
+            article.content = request.POST["content"]
+            article.save()
+
+            return redirect("articles:detail", article.id)
+
+        if request.POST["_method"] == "delete":
+            pass
+    else:
+        return render(request, "articles/detail.html", {"article": article})
+
+
+def edit(request, id):
+    article = get_object_or_404(Article, pk=id)
+    return render(request, "articles/edit.html", {"article": article})
