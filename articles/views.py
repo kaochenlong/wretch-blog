@@ -29,7 +29,8 @@ def detail(request, id):
             return redirect("articles:detail", article.id)
 
         if request.POST["_method"] == "delete":
-            pass
+            article.delete()
+            return redirect("articles:index")
     else:
         return render(request, "articles/detail.html", {"article": article})
 
