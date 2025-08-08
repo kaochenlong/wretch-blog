@@ -2,25 +2,6 @@
 
 {% block content %}
 
-<button class="btn" onclick="my_modal_1.showModal()">open modal</button>
-<dialog id="my_modal_1" class="modal">
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">
-      <input type="text" class="input" value="{{ article.title }}">
-      <textarea class="textarea">{{ article.content }}</textarea>
-    </p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
-
-
-
 <div class="flex gap-2 items-center">
   <a href="{% url 'articles:edit' article.id %}" class="btn btn-xs btn-success">編輯</a>
   <form action="{% url 'articles:detail' article.id %}" method="post">
@@ -34,4 +15,30 @@
 <article>
   {{ article.content|linebreaks }}
 </article>
+<hr />
+<h3>留言區</h3>
+
+<form action="{% url 'articles:create_comment' article.id %}"
+      method="post">
+  {% csrf_token %}
+  <div class="flex flex-col">
+    {{ comment_form.content.label_tag }}
+    {{ comment_form.content }}
+  </div>
+  <button class="btn btn-primary btn-sm">新增</button>
+</form>
+
+<ul>
+{% for comment in comments %}
+  <li class="py-1">
+    {{ comment.content }}
+    {{ comment.created_at }}
+    <form action="{% url 'comments:delete' comment.id %}" method="post">
+      {% csrf_token %}
+      <button class="btn btn-error btn-xs">刪除</button>
+    </form>
+  </li>
+{% endfor %}
+</ul>
+
 {% endblock %}

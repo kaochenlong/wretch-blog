@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from comments.forms import CommentForm
 from .models import Article
 from .forms import ArticleForm
 
@@ -38,7 +39,18 @@ def detail(request, id):
             messages.warning(request, "刪除成功")
             return redirect("articles:index")
     else:
-        return render(request, "articles/detail.html", {"article": article})
+        comment_form = CommentForm()
+        comments = article.comment_set.filter(deleted_at=None).order_by("-id")
+
+        return render(
+            request,
+            "articles/detail.html",
+            {
+                "article": article,
+                "comment_form": comment_form,
+                "comments": comments,
+            },
+        )
 
 
 def edit(request, id):

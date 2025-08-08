@@ -1,5 +1,6 @@
 from django.db import models
 from articles.models import Article
+from datetime import datetime
 
 
 class Comment(models.Model):
@@ -8,3 +9,7 @@ class Comment(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField(null=True, db_index=True)
+
+    def delete(self):
+        self.deleted_at = datetime.now()
+        self.save()
