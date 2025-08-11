@@ -2,6 +2,8 @@
 
 {% block content %}
 
+現在時刻：{% now "jS F Y H:i:s" %}
+
 <div class="flex gap-2 items-center">
   <a href="{% url 'articles:edit' article.id %}" class="btn btn-xs btn-success">編輯</a>
   <form action="{% url 'articles:detail' article.id %}" method="post">
@@ -30,13 +32,17 @@
 
 <ul>
 {% for comment in comments %}
-  <li class="py-1">
+  <li class="py-1" id="comment-{{ comment.id }}">
     {{ comment.content }}
     {{ comment.created_at }}
-    <form action="{% url 'comments:delete' comment.id %}" method="post">
-      {% csrf_token %}
-      <button class="btn btn-error btn-xs">刪除</button>
-    </form>
+    <div>
+      <button hx-delete="{% url 'comments:delete' comment.id %}"
+              hx-target="#comment-{{ comment.id }}"
+              hx-swap="outerHTML"
+              class="btn btn-error btn-xs">
+          刪除
+      </button>
+    </div>
   </li>
 {% endfor %}
 </ul>
