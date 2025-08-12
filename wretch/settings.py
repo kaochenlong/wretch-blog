@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     "sessions.apps.SessionConfig",
 ]
 
+LOGIN_URL = "/sessions/new/"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
