@@ -13,6 +13,8 @@
   </form>
 </div>
 
+{% include "ui/like_button.html" with article=article user=user only %}
+
 <h1 class="text-3xl">Hello, {{ article.title }}</h1>
 <article>
   {{ article.content|linebreaks }}

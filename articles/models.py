@@ -12,6 +12,17 @@ class Article(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+    likers = models.ManyToManyField(
+        User,
+        related_name="liked_articles",
+        through="FavoriteArticle",
+    )
 
     def __str__(self):
         return self.title
+
+
+class FavoriteArticle(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
