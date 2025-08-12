@@ -34,7 +34,7 @@
 
 <ul id="comment-section">
   {% for comment in comments %}
-    {% include "comments/comment.html" with comment=comment only %}
+    {% include "comments/comment.html" with comment=comment user=user only %}
   {% endfor %}
 </ul>
 
