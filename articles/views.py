@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from comments.forms import CommentForm
 from .models import Article
 from .forms import ArticleForm
-from django.http import HttpResponse
 
 
 def index(request):

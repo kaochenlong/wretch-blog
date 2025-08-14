@@ -48,11 +48,11 @@ def create(request):
             email=email,
             password=password,
         )
-        
+
         # 認證信
         messages.success(request, f"歡迎加入有名小站，{username}！")
         return redirect("sessions:new")  # 導向登入頁面
-        
+
     except Exception as e:
         messages.error(request, "註冊發生錯誤，請稍候再試")
         return redirect("users:new")
