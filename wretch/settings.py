@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "articles",
     "comments",
     "users",
+    "payments",
     "sessions.apps.SessionConfig",
     "debug_toolbar",
 ]
