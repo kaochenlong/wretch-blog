@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from dotenv import load_dotenv
 import braintree
+import os
+
+load_dotenv()
 
 PRICE_LIST = {
     "a": 10,
@@ -57,8 +61,8 @@ def gateway():
     return braintree.BraintreeGateway(
         braintree.Configuration(
             environment=braintree.Environment.Sandbox,
-            merchant_id="",
-            public_key="",
-            private_key="",
+            merchant_id=os.getenv("merchant_id"),
+            public_key=os.getenv("public_key"),
+            private_key=os.getenv("private_key"),
         )
     )
