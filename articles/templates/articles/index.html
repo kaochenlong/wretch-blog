@@ -6,7 +6,7 @@
 <a class="btn btn-success" href="{% url 'articles:new' %}">新增文章</a>
 <hr />
 
-{% for article in object_list %}
+{% for article in articles %}
 <article class="mb-8">
   <h2>
     {% if article.is_published %} o {% else %} x {% endif%}
