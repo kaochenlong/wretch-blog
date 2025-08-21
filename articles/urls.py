@@ -10,6 +10,5 @@ urlpatterns = [
     path("<int:id>/comments", comment_views.create, name="create_comment"),
     path("<int:id>/like", views.like, name="like"),
     path("<int:id>", views.detail, name="detail"),
-    # path("", views.index, name="index"),
-    path("", views.ArticleListView.as_view(), name="index"),
+    path("", views.index, name="index"),
 ]
